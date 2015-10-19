@@ -1,0 +1,34 @@
+{
+    "name": "kim/activity",
+    "description": "Easily retrieve a list of users and guests that are online.",
+    "keywords": [
+        "laravel",
+        "php",
+        "online activity"
+    ],
+    "homepage": "https://github.com/thomastkim/laravel-online-users",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Kim",
+            "email": "thomas@thomastkim.com",
+            "homepage": "http://thomastkim.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "~5.0",
+        "illuminate/session": "~5.0",
+        "illuminate/database": "~5.0",
+        "php" : ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "orchestra/testbench": "3.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kim\\": "src/Kim"
+        }
+    },
+    "minimum-stability": "stable"
+}
