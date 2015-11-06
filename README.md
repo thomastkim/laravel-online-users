@@ -63,8 +63,8 @@ use Activity;
 $activities = Activity::users()->get();
 
 // Loop through and echo user's name
-foreach ($activities->users as $user) {
-    echo $user->name . '<br>';
+foreach ($activities as $activity) {
+    echo $activity->user->name . '<br>';
 }
 ```
 
