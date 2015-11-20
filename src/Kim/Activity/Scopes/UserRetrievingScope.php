@@ -37,13 +37,14 @@ class UserRetrievingScope implements ScopeInterface
         $macro = function (Builder $query, $seconds = 60) use ($model)
         {
             $lastActivity = ($model->lastActivity) ?: 'last_activity';
+            $prefix = DB::getTablePrefix();
             $table = $model->getTable();
 
             return $query->with('user')
-                ->selectRaw("{$table}.*")
-                ->leftJoin("{$table} as s2", function($join) use ($table, $lastActivity) {
+                ->selectRaw("{$prefix}{$table}.*")
+                ->leftJoin("{$table} as s2", function($join) use ($prefix, $table, $lastActivity) {
                     $join->on("{$table}.user_id", '=', 's2.user_id')
-                        ->on(DB::raw("{$table}.{$lastActivity} < s2.{$lastActivity}"), DB::raw(''), DB::raw(''));
+                        ->on(DB::raw("{$prefix}{$table}.{$lastActivity} < {$prefix}s2.{$lastActivity}"), DB::raw(''), DB::raw(''));
                 })
                 ->where("{$table}.{$lastActivity}", '>=', time() - $seconds)
                 ->whereNotNull("{$table}.user_id")

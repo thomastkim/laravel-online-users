@@ -37,8 +37,10 @@ class ActivityOrderingScope implements ScopeInterface
             $table = $model->getTable();
 
             $userTable = config('auth.table');
+            $userModel = config('auth.model');
+            $userKey = (new $userModel)->getKeyName();
 
-            return $query->join($userTable, "{$table}.user_id", '=', "{$userTable}.id")->orderBy("{$userTable}.{$column}", $dir);
+            return $query->join($userTable, "{$table}.user_id", '=', "{$userTable}.{$userKey}")->orderBy("{$userTable}.{$column}", $dir);
         };
 
         $query->macro('orderByUsers', $macro);
