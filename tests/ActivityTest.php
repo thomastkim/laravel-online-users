@@ -24,7 +24,7 @@ class ActivityTest extends \Orchestra\Testbench\TestCase {
     {
         $query = $this->activity->users();
 
-        $this->assertEquals('select * from "sessions" where "last_activity" >= ? and "user_id" is not null', $query->toSql());
+        $this->assertEquals('select sessions.* from "sessions" left join "sessions" as "s2" on "sessions"."user_id" = "s2"."user_id" and sessions.last_activity < s2.last_activity   where "sessions"."last_activity" >= ? and "sessions"."user_id" is not null and "s2"."user_id" is null', $query->toSql());
         $this->assertEquals([time() - 300], $query->getBindings());
     }
 
@@ -35,7 +35,7 @@ class ActivityTest extends \Orchestra\Testbench\TestCase {
 
         $query = $this->activity->usersBySeconds($seconds);
 
-        $this->assertEquals('select * from "sessions" where "last_activity" >= ? and "user_id" is not null', $query->toSql());
+        $this->assertEquals('select sessions.* from "sessions" left join "sessions" as "s2" on "sessions"."user_id" = "s2"."user_id" and sessions.last_activity < s2.last_activity   where "sessions"."last_activity" >= ? and "sessions"."user_id" is not null and "s2"."user_id" is null', $query->toSql());
         $this->assertEquals([time() - $seconds], $query->getBindings());
     }
 
@@ -47,7 +47,7 @@ class ActivityTest extends \Orchestra\Testbench\TestCase {
 
         $query = $this->activity->usersByMinutes($minutes);
 
-        $this->assertEquals('select * from "sessions" where "last_activity" >= ? and "user_id" is not null', $query->toSql());
+        $this->assertEquals('select sessions.* from "sessions" left join "sessions" as "s2" on "sessions"."user_id" = "s2"."user_id" and sessions.last_activity < s2.last_activity   where "sessions"."last_activity" >= ? and "sessions"."user_id" is not null and "s2"."user_id" is null', $query->toSql());
         $this->assertEquals([time() - $seconds], $query->getBindings());
     }
 
@@ -59,7 +59,7 @@ class ActivityTest extends \Orchestra\Testbench\TestCase {
 
         $query = $this->activity->usersByHours($hours);
 
-        $this->assertEquals('select * from "sessions" where "last_activity" >= ? and "user_id" is not null', $query->toSql());
+        $this->assertEquals('select sessions.* from "sessions" left join "sessions" as "s2" on "sessions"."user_id" = "s2"."user_id" and sessions.last_activity < s2.last_activity   where "sessions"."last_activity" >= ? and "sessions"."user_id" is not null and "s2"."user_id" is null', $query->toSql());
         $this->assertEquals([time() - $seconds], $query->getBindings());
     }
 
