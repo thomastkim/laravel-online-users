@@ -11,10 +11,12 @@ To install this package, just follow these quick few steps.
 As always, pull this package through composer by opening `composer.json` file and adding this within `require`:
 
 ```
-"kim/activity": "~1.0"
+"kim/activity": "^1.1"
 ```
 
-Afterward, run either `composer update` or `composer install`.
+Note: If you are running Laravel 5.0 or 5.1, please require version "^1.0".
+
+Afterward, run either `composer update`.
 
 ### Providers and Aliases
 
@@ -38,10 +40,18 @@ Finally, you need to change your session configuration to use the database. Open
 SESSION_DRIVER=database
 ```
 
-Finally, publish the migration file and run it.
+If you are running L5.2, publish the default session migrations file and then migrate it by running these commands:
 
 ```
 php artisan vendor:publish
+
+php artisan migrate
+```
+
+If you are running L5.0 or L5.1, run these commands:
+
+```
+php artisan vendor:publish --provider="Kim\Activity\ActivityServiceProvider" --tag="migrations"
 
 php artisan migrate
 ```
