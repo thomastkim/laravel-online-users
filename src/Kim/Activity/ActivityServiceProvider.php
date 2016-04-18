@@ -4,8 +4,6 @@ namespace Kim\Activity;
 
 use Illuminate\Support\ServiceProvider;
 
-use Kim\Activity\Session\DatabaseWithUserSessionHandler;
-
 class ActivityServiceProvider extends ServiceProvider
 {
     /**
