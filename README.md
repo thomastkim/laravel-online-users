@@ -43,7 +43,7 @@ SESSION_DRIVER=database
 If you are running L5.2, publish the default session migrations file and then migrate it by running these commands:
 
 ```
-php artisan vendor:publish
+php artisan session:table
 
 php artisan migrate
 ```
